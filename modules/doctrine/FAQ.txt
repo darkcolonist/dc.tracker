@@ -1,0 +1,21 @@
+
+
+Q: Why does adding doctrine put folders in application/ as well as modules/?
+
+This is something I thought about deeply before deciding to do it. As I see it, a module is self-contained code which should be independent of the current application. In the case of doctrine, this is the library, hook, and command-line interface.
+
+The schema files, models and fixtures are application specific, therefore reside in the application directory.
+
+This means that the module can be copied from one Kohana installation to another can not carry any application specific data with it. It does however mean the folders in application/config/doctrine have to be recreated each time.
+
+I did post in the Kohana forum - http://forum.kohanaphp.com/comments.php?DiscussionID=96&page=1#Item_0 -  before starting to see if my understanding of the separation between application and modules was correct, but all respondents avoided answering the question (comments like "All you have to do is find a way to initialize/load the Doctrine system. This shouldn't be too hard" aren't helpful to clarify file system structure!).
+
+
+Q: Why do you not include doctrine with this module?
+
+Doctrine is under heavy development, and if I included it with this module it would always be out of date. Not including doctrine allows you to use a SVN checkout without having to delete doctrine first. The best way to get Doctrine is to download it directly from http://phpdoctrine.org. This way you will always get the latest version.
+
+I use a SVN checkout of Doctrine (pinned to the 0.10 branch) so I get bug fixes whenever they're made, and I recommend you do the same. Here's how to do it:
+
+[ screenshot tutorial - or link to page on phpdoctrine site explaining it ]
+

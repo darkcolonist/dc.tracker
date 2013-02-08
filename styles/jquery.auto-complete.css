@@ -1,0 +1,52 @@
+/**
+ * Auto Complete 5.1
+ * April 13, 2010
+ * Corey Hart @ http://www.codenothing.com
+*/ 
+
+ul.auto-complete-list {
+  margin: 0;
+  padding: 0;
+  z-index: 100;
+  opacity: 0.9;
+  font-size: 90%;
+  overflow: auto;
+  position: absolute;
+  max-height: 250px;
+  list-style-type: none;
+}
+
+ul.auto-complete-list li {
+  list-style-type: none;
+  margin: 0;
+  padding: 2px;
+  background-color: white;
+  border-bottom: 1px solid #00BF1A;
+  border-right: 1px solid #00BF1A;
+  border-left: 1px solid #00BF1A;
+  cursor: pointer;
+}
+
+ul.auto-complete-list li.auto-complete-striped {
+  background-color: #273A04;
+}
+
+ul.auto-complete-list li {
+  background-color: #1D2D00;
+  padding: 0 10px 0 3px;
+}
+
+ul.auto-complete-list li.auto-complete-list-rollover {
+  background-color: #41541c;
+}
+
+ul.auto-complete-list li span.suggest-val{
+
+}
+
+ul.auto-complete-list li span.suggest-info{
+  float: right;
+  color: #198728;
+  display: block;
+  font-style: italic;
+}
