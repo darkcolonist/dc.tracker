@@ -244,7 +244,7 @@ class Terminal_Controller extends Protected_Template_Controller {
               .' | -h : hash | -x : hide group',
       '_lm_' => '[listing macros] week : all tasks that have been modified from 7 days'
               .' | today : all tasks that have been modified from today',
-      '_mv_' => '[edit mode] <arg> | -g : group | -s : status | -d : description | -p : pinned',
+      '_mv_' => '[edit mode] <arg> | -g : group | -s : status | -d : description | -p : pinned | -a : append description separated by a pipe',
       '_mk_' => '[make mode] <arg> | -g : group | -s : status | -d : description | -p : pinned',
       '_rm_' => '[del mode] <arg>',
       '_type_' => '[view mode] <arg>',

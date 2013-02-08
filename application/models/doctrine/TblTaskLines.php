@@ -282,6 +282,11 @@ LIMIT '.$limit.';';
       $summary['description'] = '"'.$task->description.'" -> "'.$commands['-d'].'"';
       $task->description = $commands['-d'];
     }
+
+    if(isset($commands['-a'])){
+      $summary['description'] = '"'.$task->description.'" -> "'.$task->description . " | " . $commands['-a'].'"';
+      $task->description .= " | " . $commands['-a'];
+    }
     
     if(isset($commands['-g'])){
       $summary['group'] = '"'.$task->group_name.'" -> "'.$commands['-g'].'"';
