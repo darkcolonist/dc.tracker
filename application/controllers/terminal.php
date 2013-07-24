@@ -237,6 +237,26 @@ class Terminal_Controller extends Protected_Template_Controller {
     return $formatted_array;
   }
   
+  function command_touch($args){
+    if(!isset($args[0]))
+      return $this->_missing_param;
+    
+    $hash = $this->get_hash($args[0]);
+
+    // format the args
+    $args = util::terminal_build_command_array($args);
+    
+    $model = new TblTaskLines();
+    $record = Doctrine::getTable('TblTaskLines')->findOneByhash_key($hash);
+    
+    if($record == null)
+      return 'could not locate: '.$hash;
+  
+    $summary = $model->terminal_touch($record);
+  
+    return $summary;
+  }
+  
   function command_man(){
     return array(
       '_ls_' => '[listing] -g : group | -q : query | -s : status'
@@ -248,6 +268,7 @@ class Terminal_Controller extends Protected_Template_Controller {
       '_mk_' => '[make mode] <arg> | -g : group | -s : status | -d : description | -p : pinned',
       '_rm_' => '[del mode] <arg>',
       '_type_' => '[view mode] <arg>',
+      '_touch_' => '[timestamp:current] <arg>',
     );
   }
   

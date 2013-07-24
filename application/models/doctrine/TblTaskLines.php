@@ -302,4 +302,17 @@ LIMIT '.$limit.';';
   
     return $summary;
   }
+  
+  public function terminal_touch(TblTaskLines $task){
+    $touch_ts = date("Y-m-d H:i:s");
+    
+    $summary = array();
+    $summary['task'] = $task->hash_key;
+    $summary['timestamp'] = $touch_ts;
+    
+    $task->date_modified = $touch_ts;
+    $task->save();
+    
+    return $summary;
+  }
 }
