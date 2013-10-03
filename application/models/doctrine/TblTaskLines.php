@@ -12,6 +12,16 @@
  */
 class TblTaskLines extends BaseTblTaskLines
 {
+  static $PRIORITY_URGENT   = "urge";
+  static $PRIORITY_CRITICAL = "crit";
+  static $PRIORITY_HIGH     = "high";
+  static $PRIORITY_NORMAL   = "norm";
+  
+  static $STATUS_HOLD       = "hold";
+  static $STATUS_INFO       = "info";
+  static $STATUS_PENDING    = "pend";
+  static $STATUS_SOON       = "soon";
+  
   public function get_one_by_hash($hash){
     $query = Doctrine_Query::create()
       ->from("TblTaskLines t")
@@ -153,8 +163,35 @@ class TblTaskLines extends BaseTblTaskLines
 
     return $result;
   }
-
+  
+  protected function default_order_string($task_line_table_alias = null){
+    $field = $task_line_table_alias == null 
+      ? "status"
+      : $task_line_table_alias.".status";
+    
+    $order_string = 'FIELD('.$field
+            .',"'.TblTaskLines::$PRIORITY_URGENT.'"'
+            .',"'.TblTaskLines::$PRIORITY_CRITICAL.'"'
+            .',"'.TblTaskLines::$PRIORITY_HIGH.'"'
+            .',"'.TblTaskLines::$PRIORITY_NORMAL.'"'
+            .',"'.TblTaskLines::$STATUS_PENDING.'"'
+            .',"'.TblTaskLines::$STATUS_HOLD.'"'
+            .',"'.TblTaskLines::$STATUS_INFO.'"'
+            .',"'.TblTaskLines::$STATUS_SOON.'"'
+            .')';
+    
+    return $order_string;
+  }
+  
   /**
+   * fetch the latest tasks
+   * 
+   * priority
+   * urge - level 4 (highest)
+   * crit - level 3
+   * high - level 2
+   * norm - level 1 (normal)
+   * 
    * @param array $options
    * @return Doctrine_Collection
    */
@@ -194,7 +231,8 @@ class TblTaskLines extends BaseTblTaskLines
     if(isset($commands['-o']))
       $query->orderBy($commands['-o']);
     else
-      $query->orderBy('status, group_name, date_created');
+      $query->orderBy($this->default_order_string()
+              .', group_name, date_created DESC');
     
     if(count($commands) == 0)
       $query->orWhere('is_pinned = 1');
@@ -233,7 +271,7 @@ class TblTaskLines extends BaseTblTaskLines
         break;
     }
 
-    $query->orderBy('FIELD(status,"crit","high","pend","done","subc","subp","subd","info")'
+    $query->orderBy($this->default_order_string()
             .',group_name,date_created DESC');
 
     return $query->execute();
