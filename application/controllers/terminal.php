@@ -269,6 +269,7 @@ class Terminal_Controller extends Protected_Template_Controller {
       '_rm_' => '[del mode] <arg>',
       '_type_' => '[view mode] <arg>',
       '_touch_' => '[timestamp:current] <arg>',
+      '?priorities' => 'urge : urgent | crit : critical | high : high | norm : normal | pend : pending | hold : hold | info : info | soon : soon',
     );
   }
   
