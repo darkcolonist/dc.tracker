@@ -5,7 +5,7 @@ $config['default'] = array
 	'persistent'    => FALSE,
 	'connection'    => array
 	(
-		'database' => 'db_tracker20120328',
+		'database' => 'dc_tracker',
 		'host'     => 'localhost',
 		'user'     => 'root',
 		'pass'     => 'qwerty321',
